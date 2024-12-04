@@ -6,9 +6,9 @@ from transformers import DPRQuestionEncoder, DPRQuestionEncoderTokenizer, BartFo
 import torch
 import bart_model
 import gpt2_model
-import token
+import my_token
 
-bot = telebot.TeleBot(token.BOT_TOKEN)
+bot = telebot.TeleBot(my_token.BOT_TOKEN)
 
 qdrant_client = QdrantClient(host="localhost", port=6333)
 # Загрузка модели и токенизатора для DPRQuestionEncoder
@@ -42,12 +42,9 @@ def ask(message):
 
     relevant_data = retrieve_relevant_data_from_qdrant(query_vector)
 
-    # Создаем промпт, включающий запрос и релевантные данные
 
-    #ТУТ МЕНЯТЬ МОДЕЛЬ ПРИ ВЫБОРЕ НОВОЙ МОДЕЛИ ПОЛЬЗОВАТЕЛЕМ
     prompt = llama_model.create_prompt(query, relevant_data)
 
-    #ТУТ МЕНЯТЬ МОДЕЛЬ ПРИ ВЫБОРЕ НОВОЙ МОДЕЛИ ПОЛЬЗОВАТЕЛЕМ
     response = llama_model.generate_response(prompt)
 
     bot.delete_message(message.chat.id, new_m.message_id)

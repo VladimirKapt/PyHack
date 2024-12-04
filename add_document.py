@@ -4,7 +4,7 @@ from transformers import DPRQuestionEncoder, DPRQuestionEncoderTokenizer
 import torch
 import nltk
 from nltk.tokenize import sent_tokenize
-from TextParser import TextParser
+from text_parser import TextParser
 
 nltk.download('punkt')
 nltk.download('punkt_tab')
